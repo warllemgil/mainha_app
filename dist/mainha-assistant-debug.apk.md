@@ -10,7 +10,7 @@ Tamanho atual: 1505631 bytes; binario ou nao textual; sha256 curto: `9be1d4a7ef1
 
 ## Alteracao registrada
 
-Novo apk/artefato binario gerado adicionado em Distribuicao/artefatos gerados.
+APK debug do Mainha Assistant atualizado e recompilado com `MAINHA_BACKEND_URL=https://mainha-assistant-backend.onrender.com`, apontando o app Android para o backend hospedado no Render. O token `ASSISTANT_AUTH_TOKEN` nao foi embutido no APK; deve ser informado no campo de token do app quando a autenticacao estiver ativa no backend.
 
 ## Regra de manutencao
 
