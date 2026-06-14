@@ -40,11 +40,7 @@ class Settings:
     app_version: str = "0.1.0"
 
     gemini_api_key: str = _env("GEMINI_API_KEY")
-    gemini_model: str = _env("GEMINI_MODEL", "gemini-1.5-flash")
-    gemini_api_base_url: str = _env(
-        "GEMINI_API_BASE_URL",
-        "https://generativelanguage.googleapis.com/v1beta",
-    )
+    gemini_model: str = _env("GEMINI_MODEL", "gemini-3.5-flash")
 
     supervoz_api_url: str = _env(
         "SUPERVOZ_API_URL",

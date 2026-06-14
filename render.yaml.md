@@ -9,7 +9,7 @@ Tipo: Blueprint Render
 
 ## Alteracao registrada
 
-Adicionado blueprint do Render para hospedar o backend FastAPI no plano gratuito, apontando `rootDir` para `backend`, instalando `backend/requirements.txt`, iniciando `uvicorn` com a porta `$PORT` do Render e declarando variaveis de ambiente. Segredos como `GEMINI_API_KEY`, `SUPERVOZ_API_TOKEN` e `ASSISTANT_AUTH_TOKEN` ficam com `sync: false`, portanto precisam ser preenchidos no Render.
+Adicionado blueprint do Render para hospedar o backend FastAPI no plano gratuito, apontando `rootDir` para `backend`, instalando `backend/requirements.txt`, iniciando `uvicorn` com a porta `$PORT` do Render e declarando variaveis de ambiente. O modelo padrao foi alinhado para `gemini-3.5-flash`. Segredos como `GEMINI_API_KEY`, `SUPERVOZ_API_TOKEN` e `ASSISTANT_AUTH_TOKEN` ficam com `sync: false`, portanto precisam ser preenchidos no Render.
 
 ## Regra de manutencao
 

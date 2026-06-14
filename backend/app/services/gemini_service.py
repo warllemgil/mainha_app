@@ -1,4 +1,7 @@
-import httpx
+import logging
+
+from google import genai
+from google.genai import types
 
 from app.config import Settings, get_settings
 
@@ -7,9 +10,13 @@ class GeminiServiceError(RuntimeError):
     pass
 
 
+LOGGER = logging.getLogger("mainha.gemini")
+
+
 class GeminiService:
     def __init__(self, settings: Settings | None = None) -> None:
         self.settings = settings or get_settings()
+        self.client = genai.Client(api_key=self.settings.gemini_api_key)
 
     async def generate_response(
         self,
@@ -21,43 +28,57 @@ class GeminiService:
             raise GeminiServiceError("GEMINI_API_KEY nao configurada no backend.")
 
         prompt = self._build_prompt(user_text, session_id=session_id)
-        url = (
-            f"{self.settings.gemini_api_base_url.rstrip('/')}/models/"
-            f"{self.settings.gemini_model}:generateContent"
+        model = self.settings.gemini_model
+        LOGGER.info(
+            "Chamando Gemini modelo=%s session_id=%s prompt_chars=%s",
+            model,
+            session_id or "-",
+            len(prompt),
         )
-        payload = {
-            "contents": [
-                {
-                    "role": "user",
-                    "parts": [{"text": prompt}],
-                }
-            ],
-            "generationConfig": {
-                "temperature": 0.6,
-                "topP": 0.9,
-                "maxOutputTokens": 800,
-            },
-        }
-
         try:
-            async with httpx.AsyncClient(timeout=self.settings.request_timeout_seconds) as client:
-                response = await client.post(
-                    url,
-                    params={"key": self.settings.gemini_api_key},
-                    json=payload,
-                )
-        except httpx.HTTPError as exc:
-            raise GeminiServiceError(f"Falha de rede ao chamar Gemini: {exc}") from exc
+            response = await self._generate_content(
+                model=model,
+                prompt=prompt,
+            )
+        except Exception as exc:
+            raise GeminiServiceError(f"Falha ao chamar Gemini: {exc}") from exc
 
-        if response.status_code >= 400:
-            detail = response.text[:500]
-            raise GeminiServiceError(f"Gemini retornou HTTP {response.status_code}: {detail}")
-
-        data = response.json()
-        text = self._extract_text(data)
+        text = self._extract_text(response)
         if not text:
             raise GeminiServiceError("Gemini nao retornou texto utilizavel.")
         return text.strip()
+
+    async def _generate_content(self, *, model: str, prompt: str):
+        import asyncio
+
+        config = types.GenerateContentConfig(
+            temperature=0.6,
+            top_p=0.9,
+            max_output_tokens=800,
+        )
+        return await asyncio.to_thread(
+            self.client.models.generate_content,
+            model=model,
+            contents=[prompt],
+            config=config,
+        )
+
+    def _extract_text(self, response) -> str:
+        text = getattr(response, "text", "") or ""
+        if text:
+            return text
+
+        candidates = getattr(response, "candidates", None) or []
+        parts: list[str] = []
+        for candidate in candidates:
+            content = getattr(candidate, "content", None)
+            if not content:
+                continue
+            for part in getattr(content, "parts", None) or []:
+                part_text = getattr(part, "text", None)
+                if part_text:
+                    parts.append(part_text)
+        return "\n".join(parts)
 
     def _build_prompt(self, user_text: str, *, session_id: str | None = None) -> str:
         context = (
@@ -68,14 +89,3 @@ class GeminiService:
         )
         session = f"\nSessao: {session_id}" if session_id else ""
         return f"{context}{session}\n\nUsuario: {user_text}"
-
-    def _extract_text(self, data: dict) -> str:
-        candidates = data.get("candidates") or []
-        parts: list[str] = []
-        for candidate in candidates:
-            content = candidate.get("content") or {}
-            for part in content.get("parts") or []:
-                text = part.get("text")
-                if text:
-                    parts.append(text)
-        return "\n".join(parts)

@@ -19,7 +19,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edite `.env` com `GEMINI_API_KEY`, `SUPERVOZ_API_URL` e, se existir, `SUPERVOZ_API_TOKEN`.
+Edite `.env` com `GEMINI_API_KEY`, `GEMINI_MODEL` e `SUPERVOZ_API_URL`. O modelo padrao atual e `gemini-3.5-flash`.
 
 ```bash
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8787
@@ -46,6 +46,10 @@ Se `ASSISTANT_AUTH_TOKEN` estiver configurado, envie:
 - `POST /assistant/chat`: texto do usuario -> Gemini -> SuperVoz -> texto + audio.
 - `POST /assistant/voice`: placeholder para audio bruto. No MVP, prefira Web Speech API no frontend e use `/assistant/chat`.
 - `POST /assistant/tools`: reserva para acoes futuras com execucao segura.
+
+## Gemini atual
+
+O backend usa a SDK nova `google-genai` e chama `client.models.generate_content(...)` com o modelo configurado em `GEMINI_MODEL`.
 
 ## Seguranca
 

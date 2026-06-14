@@ -10,7 +10,7 @@ Tamanho atual: 1479 bytes; 52 linhas; sha256 curto: `db9c654eea23a854`
 
 ## Alteracao registrada
 
-Novo componente do backend/orquestrador FastAPI do Mainha Assistant, integrando Gemini, STT, ferramentas e SuperVoz.
+Documentacao atualizada para a SDK nova `google-genai`, para o modelo padrao `gemini-3.5-flash` e para o fluxo de deploy/teste do backend atualizado.
 
 ## Regra de manutencao
 

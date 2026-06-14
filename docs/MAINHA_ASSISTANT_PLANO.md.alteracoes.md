@@ -10,7 +10,7 @@ Tamanho atual: 5799 bytes; 118 linhas; sha256 curto: `f16583e49c30108c`
 
 ## Alteracao registrada
 
-Nova documentacao tecnica/plano de evolucao do Mainha Assistant.
+O plano tecnico foi atualizado para refletir a integracao Gemini nova: `GEMINI_MODEL` passou para `gemini-3.5-flash` e a `GEMINI_API_BASE_URL` deixou de ser tratada como variavel necessaria no backend atual.
 
 ## Regra de manutencao
 

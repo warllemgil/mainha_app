@@ -82,8 +82,7 @@ O backend passa a guardar segredos:
 ## 6. Variaveis de ambiente necessarias
 
 - `GEMINI_API_KEY`: chave Gemini no backend.
-- `GEMINI_MODEL`: modelo Gemini, padrao `gemini-1.5-flash`.
-- `GEMINI_API_BASE_URL`: endpoint base da API Gemini.
+- `GEMINI_MODEL`: modelo Gemini, padrao `gemini-3.5-flash`.
 - `SUPERVOZ_API_URL`: URL base da SuperVoz F5.
 - `SUPERVOZ_API_TOKEN`: token Bearer da SuperVoz, se exigido.
 - `SUPERVOZ_VOICE`: voz, padrao `warllem`.
