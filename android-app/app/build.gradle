@@ -1,0 +1,32 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "br.com.mainha.assistant"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "br.com.mainha.assistant"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "0.1.0"
+
+        def backendUrl = providers.gradleProperty("MAINHA_BACKEND_URL")
+                .orElse(providers.environmentVariable("MAINHA_BACKEND_URL"))
+                .orElse("http://10.0.2.2:8787")
+                .get()
+        def assistantToken = providers.gradleProperty("MAINHA_ASSISTANT_TOKEN")
+                .orElse(providers.environmentVariable("MAINHA_ASSISTANT_TOKEN"))
+                .orElse("")
+                .get()
+
+        buildConfigField "String", "MAINHA_BACKEND_URL", "\"${backendUrl.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+        buildConfigField "String", "MAINHA_ASSISTANT_TOKEN", "\"${assistantToken.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+}

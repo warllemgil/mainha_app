@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+
+.env
+.venv/
+venv/
+env/
+
+*.log
+
+android-sdk/
+android-app/local.properties
+android-app/.gradle/
+android-app/build/
+android-app/app/build/

@@ -1,0 +1,23 @@
+# Registro de alteracoes - `settings.gradle`
+
+Arquivo base: `android-app/settings.gradle`
+Arquivo de registro: `android-app/settings.gradle.md`
+Status no Git antes do commit: Novo
+Data do registro: 2026-06-14
+Area do projeto: Aplicativo Android nativo do Mainha Assistant.
+Tipo: Configuracao ou manifesto
+Tamanho atual: 334 bytes; 18 linhas; sha256 curto: `8eabace3facc4422`
+
+## Alteracao registrada
+
+Novo componente do app Android para conversar com o backend do Mainha Assistant e reproduzir resposta em audio.
+
+## Regra de manutencao
+
+Este arquivo `.md` deve ser atualizado sempre que o arquivo base `android-app/settings.gradle` receber qualquer alteracao antes de commit/push. Registre aqui o que mudou, por que mudou e qualquer impacto esperado em build, execucao, deploy, testes ou artefatos gerados.
+
+## Observacoes para commit
+
+- Conferir se o arquivo base deve mesmo entrar no commit.
+- Para binarios e artefatos gerados, confirmar se o repositorio deve versionar esse conteudo.
+- Para arquivos com tokens, endpoints ou configuracoes, confirmar que nenhum segredo real foi incluido.

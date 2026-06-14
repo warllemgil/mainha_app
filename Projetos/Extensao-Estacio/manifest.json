@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Leitor Estácio",
+  "version": "1.4.0",
+  "description": "Lê páginas da web em voz alta com voz nativa ou SuperVoz F5",
+  "permissions": ["activeTab", "scripting", "storage", "offscreen"],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "*://*.estacio.br/*",
+    "*://*.estacioprd.net/*",
+    "*://stecine.azureedge.net/*",
+    "*://*.ensineme.com.br/*",
+    "https://warllem-supervoz-f5-api.hf.space/*",
+    "https://*.modal.run/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png",
+      "128": "icon.png"
+    },
+    "default_title": "Leitor Estácio"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "*://*.estacio.br/*",
+        "*://*.estacioprd.net/*",
+        "*://stecine.azureedge.net/*",
+        "*://*.ensineme.com.br/*"
+      ],
+      "js": ["content.js"],
+      "css": ["player.css"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
