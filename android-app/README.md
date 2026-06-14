@@ -6,6 +6,10 @@ Usuario fala -> STT Android -> backend Mainha Assistant -> Gemini -> SuperVoz F5
 
 O APK pode sair pronto para uso se voce embutir a URL do seu backend no build. A chave Gemini e o token SuperVoz continuam no backend.
 
+## Estado atual e proxima melhoria
+
+Hoje o app ainda usa o campo de token do backend na tela de configuracao quando a autenticacao esta ativa. A proxima versao deve guardar esse token de forma local e protegida, com desbloqueio por senha ou biometria, para evitar digitar credenciais toda vez.
+
 ## Build pelo GitHub
 
 1. Envie este repositorio para o GitHub.

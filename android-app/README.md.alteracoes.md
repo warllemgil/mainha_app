@@ -10,7 +10,7 @@ Tamanho atual: 1665 bytes; 47 linhas; sha256 curto: `d0b8ff479216c374`
 
 ## Alteracao registrada
 
-Novo componente do app Android para conversar com o backend do Mainha Assistant e reproduzir resposta em audio.
+O README do app Android foi atualizado com o estado atual do build publicado, o uso de backend remoto no Render e o plano de armazenar o token localmente com desbloqueio por senha ou biometria para evitar redigitar credenciais toda vez.
 
 ## Regra de manutencao
 

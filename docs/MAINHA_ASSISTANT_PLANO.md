@@ -115,3 +115,4 @@ O backend passa a guardar segredos:
 8. Adicionar historico curto de conversa por `session_id`.
 9. Implementar tools apenas com allowlist e dry-run primeiro.
 10. Avaliar app Android ou PWA depois do MVP web/extensao estar estavel.
+11. Executar as melhorias de interface e acesso descritas em [MAINHA_ASSISTANT_MELHORIAS_UI.md](/workspaces/mainha_app/docs/MAINHA_ASSISTANT_MELHORIAS_UI.md).
